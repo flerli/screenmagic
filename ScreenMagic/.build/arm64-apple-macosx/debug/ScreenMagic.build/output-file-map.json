@@ -1,0 +1,54 @@
+{
+  "": {
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/master.swiftdeps"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/AppDelegate.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/AppDelegate.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/AppDelegate.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/AppDelegate.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/AppDelegate.dia"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ConfigManager.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigManager.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigManager.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigManager.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigManager.dia"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ConfigWindowController.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigWindowController.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigWindowController.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigWindowController~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigWindowController.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ConfigWindowController.dia"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/DrawingView.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingView.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingView.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingView~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingView.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingView.dia"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/DrawingWindowController.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingWindowController.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingWindowController.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingWindowController~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingWindowController.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/DrawingWindowController.dia"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ScreenshotManager.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ScreenshotManager.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ScreenshotManager.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ScreenshotManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ScreenshotManager.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/ScreenshotManager.dia"
+  },
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/main.swift": {
+    "dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/main.d",
+    "object": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/main.swift.o",
+    "swiftmodule": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/main.swiftdeps",
+    "diagnostics": "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/debug/ScreenMagic.build/main.dia"
+  }
+}

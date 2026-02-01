@@ -1,0 +1,66 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "ScreenMagic-arm64-apple-macosx15.0-release.exe": ["<ScreenMagic-arm64-apple-macosx15.0-release.exe>"]
+  "ScreenMagic-arm64-apple-macosx15.0-release.module": ["<ScreenMagic-arm64-apple-macosx15.0-release.module>"]
+  "main": ["<ScreenMagic-arm64-apple-macosx15.0-release.exe>","<ScreenMagic-arm64-apple-macosx15.0-release.module>"]
+  "test": ["<ScreenMagic-arm64-apple-macosx15.0-release.exe>","<ScreenMagic-arm64-apple-macosx15.0-release.module>"]
+default: "main"
+nodes:
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/AppDelegate.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ConfigManager.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ConfigWindowController.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/DrawingView.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/DrawingWindowController.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ScreenshotManager.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/main.swift"]
+    outputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/sources"]
+    description: "Write auxiliary file /Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/sources"
+
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/AppDelegate.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingView.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ScreenshotManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/main.swift.o"]
+    outputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.product/Objects.LinkFileList"
+
+  "/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Library/Developer/CommandLineTools/usr/bin/swiftc"]
+    outputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"
+
+  "<ScreenMagic-arm64-apple-macosx15.0-release.exe>":
+    tool: phony
+    inputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic"]
+    outputs: ["<ScreenMagic-arm64-apple-macosx15.0-release.exe>"]
+
+  "<ScreenMagic-arm64-apple-macosx15.0-release.module>":
+    tool: phony
+    inputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/AppDelegate.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingView.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ScreenshotManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/main.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/Modules/ScreenMagic.swiftmodule"]
+    outputs: ["<ScreenMagic-arm64-apple-macosx15.0-release.module>"]
+
+  "C.ScreenMagic-arm64-apple-macosx15.0-release.exe":
+    tool: shell
+    inputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/AppDelegate.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingView.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ScreenshotManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/main.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.product/Objects.LinkFileList"]
+    outputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic"]
+    description: "Linking ./.build/arm64-apple-macosx/release/ScreenMagic"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-L","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release","-o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic","-module-name","ScreenMagic","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-dead_strip","-Xlinker","-alias","-Xlinker","_ScreenMagic_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Library/Developer/CommandLineTools/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx13.0","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g"]
+
+  "C.ScreenMagic-arm64-apple-macosx15.0-release.module":
+    tool: shell
+    inputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/AppDelegate.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ConfigManager.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ConfigWindowController.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/DrawingView.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/DrawingWindowController.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/ScreenshotManager.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/main.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/sources"]
+    outputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/AppDelegate.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ConfigWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingView.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/DrawingWindowController.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/ScreenshotManager.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/main.swift.o","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/Modules/ScreenMagic.swiftmodule"]
+    description: "Compiling Swift Module 'ScreenMagic' (7 sources)"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-module-name","ScreenMagic","-emit-dependencies","-emit-module","-emit-module-path","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/Modules/ScreenMagic.swiftmodule","-output-file-map","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/output-file-map.json","-whole-module-optimization","-num-threads","10","-c","@/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ScreenMagic.build/sources","-I","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/Modules","-target","arm64-apple-macosx13.0","-whole-module-optimization","-num-threads","10","-serialize-diagnostics","-O","-j10","-DSWIFT_PACKAGE","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/.build/arm64-apple-macosx/release/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","ScreenMagic_main","-color-diagnostics","-swift-version","5","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g","-Xcc","-isysroot","-Xcc","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-Xcc","-fPIC","-Xcc","-g","-package-name","screenmagic"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Sources/","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Package.swift","/Users/flerli/Documents/swaibian/repos/screenmagic/ScreenMagic/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+
