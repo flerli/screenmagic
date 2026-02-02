@@ -400,6 +400,7 @@ class DrawingWindowController: NSWindowController {
         selectedColorTag = number
         let color = tagToColor(number)
         drawingView.currentColor = color
+        drawingView.currentColorNumber = number
         updateColorSelection()
     }
     
@@ -413,6 +414,7 @@ class DrawingWindowController: NSWindowController {
         selectedColorTag = sender.tag
         let color = tagToColor(sender.tag)
         drawingView.currentColor = color
+        drawingView.currentColorNumber = sender.tag
         updateColorSelection()
     }
     
@@ -433,8 +435,17 @@ class DrawingWindowController: NSWindowController {
     }
     
     @objc func toggleCropMode() {
-        // Toggle the button state
-        cropButton.state = cropButton.state == .on ? .off : .on
+        // When called from keyboard (c key), toggle the button state
+        // When called from button click, button already toggled itself
+        // Check if this is from keyboard by seeing if button state matches drawing view state
+        if cropButton.state == .on && drawingView.isCropMode {
+            // Called from keyboard while already on - turn off
+            cropButton.state = .off
+        } else if cropButton.state == .off && !drawingView.isCropMode {
+            // Called from keyboard while already off - turn on
+            cropButton.state = .on
+        }
+        // Now sync drawing view with button state
         drawingView.isCropMode = cropButton.state == .on
         updateCropButtonAppearance()
     }

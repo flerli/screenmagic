@@ -170,11 +170,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let image: NSImage?
         
+        // Get display list
+        let displays = screenshotManager.getDisplayList()
+        let isSingleDisplay = displays.count == 1
+        
+        // Use display 0 if only one display, otherwise use configured index
+        let sourceIndex = isSingleDisplay ? 0 : min(config.sourceDisplayIndex, displays.count - 1)
+        
         if config.useCustomCaptureArea {
             // Get display bounds to make capture area relative
-            let displays = screenshotManager.getDisplayList()
-            let displayIndex = min(config.sourceDisplayIndex, displays.count - 1)
-            let displayID = displays[max(0, displayIndex)]
+            let displayID = displays[max(0, sourceIndex)]
             let displayBounds = CGDisplayBounds(displayID)
             
             // Capture custom area relative to selected display
@@ -187,7 +192,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             image = screenshotManager.captureArea(rect: rect)
         } else {
             // Capture full display
-            image = screenshotManager.captureDisplay(displayIndex: config.sourceDisplayIndex)
+            image = screenshotManager.captureDisplay(displayIndex: sourceIndex)
         }
         
         guard let capturedImage = image else {
@@ -200,7 +205,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let borderedImage = addBorder(to: capturedImage, border: config.borderSize)
         
         // Show drawing window at configured position
-        showDrawingWindow(with: borderedImage)
+        showDrawingWindow(with: borderedImage, singleDisplay: isSingleDisplay)
     }
     
     private func addBorder(to image: NSImage, border: CGFloat) -> NSImage {
@@ -232,7 +237,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return newImage
     }
     
-    private func showDrawingWindow(with image: NSImage) {
+    private func showDrawingWindow(with image: NSImage, singleDisplay: Bool = false) {
         let config = ConfigManager.shared.config
         
         // Close existing window if any
@@ -253,7 +258,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if config.centerWindow {
             // Get target screen using NSScreen (proper coordinate system for windows)
             let screens = NSScreen.screens
-            let targetIndex = min(config.targetDisplayIndex, screens.count - 1)
+            // Use screen 0 if only one display, otherwise use configured index
+            let targetIndex = singleDisplay ? 0 : min(config.targetDisplayIndex, screens.count - 1)
             let targetScreen = screens[max(0, targetIndex)]
             let screenFrame = targetScreen.frame
             

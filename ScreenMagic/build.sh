@@ -21,6 +21,12 @@ rm -rf "build"
 mkdir -p "$BUNDLE_DIR/Contents/MacOS"
 mkdir -p "$BUNDLE_DIR/Contents/Resources"
 
+# Generate app icon
+echo "Generating app icon..."
+swift Scripts/generate_icon.swift
+iconutil -c icns -o "$BUNDLE_DIR/Contents/Resources/AppIcon.icns" build/AppIcon.iconset
+rm -rf build/AppIcon.iconset
+
 # Copy executable
 cp "$BUILD_DIR/$APP_NAME" "$BUNDLE_DIR/Contents/MacOS/"
 

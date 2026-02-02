@@ -187,6 +187,7 @@ class DrawingView: NSView {
             updateCursor()
         }
     }
+    var currentColorNumber: Int = 1  // Track which color number is selected (1-6)
     var brushSize: CGFloat = 3.0 {
         didSet {
             updateCursor()
@@ -294,10 +295,17 @@ class DrawingView: NSView {
         }
     }
     
+    private func isInDrawingArea(_ point: NSPoint) -> Bool {
+        let imageRect = calculateImageRect()
+        // Also check we're not in the top control bar area (top 100px of window)
+        let controlBarHeight: CGFloat = 100
+        let isInControlBar = point.y > bounds.height - controlBarHeight
+        return imageRect.contains(point) && !isInControlBar
+    }
+    
     override func cursorUpdate(with event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
-        let imageRect = calculateImageRect()
-        if imageRect.contains(point) {
+        if isInDrawingArea(point) {
             circleCursor?.set()
         } else {
             NSCursor.arrow.set()
@@ -306,8 +314,7 @@ class DrawingView: NSView {
     
     override func mouseEntered(with event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
-        let imageRect = calculateImageRect()
-        if imageRect.contains(point) {
+        if isInDrawingArea(point) {
             circleCursor?.set()
         } else {
             NSCursor.arrow.set()
@@ -320,8 +327,7 @@ class DrawingView: NSView {
     
     override func mouseMoved(with event: NSEvent) {
         lastMouseLocation = convert(event.locationInWindow, from: nil)
-        let imageRect = calculateImageRect()
-        if imageRect.contains(lastMouseLocation) {
+        if isInDrawingArea(lastMouseLocation) {
             circleCursor?.set()
         } else {
             NSCursor.arrow.set()
@@ -742,6 +748,15 @@ class DrawingView: NSView {
     override func mouseDown(with event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
         lastMouseLocation = point
+        
+        // Check for double-click to add badge
+        if event.clickCount == 2 {
+            let imageRect = calculateImageRect()
+            if imageRect.contains(point) {
+                addNumberBadge(number: currentColorNumber)
+                return
+            }
+        }
         
         if event.modifierFlags.contains(.option) {
             isPanning = true

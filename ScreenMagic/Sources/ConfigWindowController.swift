@@ -259,6 +259,7 @@ class ConfigWindowController: NSWindowController {
         let legendItems = [
             ("1-6", "Switch color (Red, Blue, Green, Yellow, Purple, Cyan)"),
             ("1-9 x2", "Double-press to add number badge at cursor"),
+            ("Dbl-Click", "Add current color number badge at cursor"),
             ("c", "Toggle crop mode"),
             ("Cmd+Z", "Undo last action"),
             ("Cmd+C", "Copy to clipboard and close"),
