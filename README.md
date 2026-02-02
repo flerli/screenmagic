@@ -1,28 +1,41 @@
 # ScreenMagic
 
-A macOS screenshot tool designed for use with Wacom Intuos tablets. Take screenshots of a specific display, draw annotations on top, and copy to clipboard - all triggered by tablet buttons.
+A macOS screenshot annotation tool designed for quick visual communication. Capture screenshots with global hotkeys, annotate them with pen/tablet support, and copy directly to clipboard.
+
+![ScreenMagic](https://img.shields.io/badge/macOS-12.0+-blue) ![Swift](https://img.shields.io/badge/Swift-5.9-orange)
+
+![ScreenMagic Screenshot](ScreenMagic/media/ScreenMagic.jpg)
 
 ## Features
 
-- **Menu Bar App**: Runs quietly in the background with a small icon in the macOS menu bar
-- **Multi-Display Support**: Configure which display to capture screenshots from
-- **Wacom Tablet Integration**: Trigger screenshots and copy actions via configurable tablet buttons
-- **Drawing Tools**: 
-  - Multiple colors (Red, Blue, Green, Yellow, Black, White)
-  - Adjustable brush size
-  - Pressure sensitivity support for Wacom tablets
-  - Undo support
-  - Clear all drawings
-- **Configurable Window Position**: Place the drawing window exactly where your Wacom tablet is projected
-- **Clipboard Export**: Copy the screenshot with annotations to clipboard with a single button press
-- **Save to File**: Export as PNG
+### Screenshot Capture
+- **Global hotkey** (default: F13) to capture screenshots instantly
+- **Multi-display support** - choose which display to capture
+- **Custom capture area** - define specific regions relative to the selected display
+- **Configurable border** - add padding around screenshots for annotation space
 
-## Requirements
+### Drawing & Annotation
+- **Pressure-sensitive drawing** with Wacom tablet support
+- **Multiple colors** - Red, Blue, Green, Yellow, Black, White
+- **Adjustable stroke size** with real-time circle cursor preview
+- **Pressure flow control** - configure how much pen pressure affects stroke thickness
+- **Consistent stroke behavior**:
+  - While drawing: stroke thickness stays constant on screen
+  - After drawing: strokes become part of the image and scale with zoom
+- **Undo support** (Cmd+Z)
+- **Clear all drawings**
 
-- macOS 13.0 (Ventura) or later
-- Xcode Command Line Tools (for building)
-- Screen Recording permission (requested on first run)
-- Accessibility permission (for global hotkeys)
+### Zoom & Pan
+- **Mouse/tablet wheel zoom** centered on cursor position
+- **Fit button** to reset view to image-fit
+- **Option+drag** to pan the image
+- **Shift+scroll** for manual panning
+- Zoom out stops at perfect image-fit (no empty gray space)
+
+### Export
+- **Copy to clipboard** (Cmd+C) - copies visible/cropped area
+- **Save to file** (Cmd+S) - save as PNG
+- When zoomed in, exports only the visible cropped portion
 
 ## Installation
 
@@ -30,11 +43,12 @@ A macOS screenshot tool designed for use with Wacom Intuos tablets. Take screens
 
 ```bash
 cd ScreenMagic
-chmod +x build.sh
 ./build.sh
 ```
 
-### Install
+The built app will be at `build/ScreenMagic.app`
+
+### Install to Applications
 
 ```bash
 cp -r build/ScreenMagic.app /Applications/
@@ -46,76 +60,117 @@ cp -r build/ScreenMagic.app /Applications/
 open /Applications/ScreenMagic.app
 ```
 
-Or double-click the app in Finder.
+## Usage
+
+1. **Launch ScreenMagic** - appears in menu bar
+2. **Press F13** (or configured hotkey) to capture a screenshot
+3. **Draw annotations** using mouse or Wacom tablet
+4. **Press F14** (or Cmd+C) to copy to clipboard
+5. **Paste** into any app (Slack, VS Code, email, etc.)
+
+### Menu Bar Options
+- **Take Screenshot** - manual trigger
+- **Configuration** - open settings window
+- **Quit** - exit application
 
 ## Configuration
 
-Click the camera icon in the menu bar and select "Configuration..." to open the settings window.
+Access via menu bar → Configuration:
 
-### Display Settings
-- **Display**: Select which monitor to capture screenshots from
+### Capture Settings
+| Setting | Description |
+|---------|-------------|
+| Source Display | Which monitor to capture |
+| Use Custom Capture Area | Enable to capture specific region |
+| X, Y, Width, Height | Capture region (relative to selected display) |
 
-### Window Position
-- **X, Y**: Set the pixel position where the drawing window appears
-- **Width, Height**: Set the size of the drawing window
+### Window Settings  
+| Setting | Description |
+|---------|-------------|
+| Target Display | Where the drawing window appears |
+| Center Window | Auto-center or use custom position |
+| Window Size | Default drawing window dimensions |
+
+### Drawing Settings
+| Setting | Description |
+|---------|-------------|
+| Border (px) | Padding added around screenshot |
+| Stroke Size | Default brush size in pixels |
+| Pressure Flow | 0% = constant thickness, 100% = full pressure sensitivity |
 
 ### Keyboard Shortcuts
-- **Screenshot Key**: Default is F5 - press to capture a screenshot
-- **Copy Key**: Default is F6 - press to copy screenshot with drawings to clipboard
+| Setting | Description |
+|---------|-------------|
+| Screenshot Key | Trigger capture (default: F13) |
+| Copy Key | Copy and close window (default: F14) |
 
-### Wacom Tablet Buttons
-Configure your Wacom tablet buttons in the Wacom preferences to send the keyboard shortcuts above. Alternatively, use the raw tablet button numbers (0-7).
+## Keyboard Shortcuts
 
-## Usage
+| Action | Shortcut |
+|--------|----------|
+| Take Screenshot | F13 (configurable) |
+| Copy to Clipboard | Cmd+C or F14 |
+| Save to File | Cmd+S |
+| Undo | Cmd+Z |
+| Pan | Option+Drag |
+| Pan (alternate) | Shift+Scroll |
+| Zoom | Scroll wheel |
+| Reset Zoom | Click "Fit" button |
 
-1. **Take Screenshot**: Press the configured key (default: F5) or tablet button
-2. **Draw**: Use mouse or tablet pen to draw on the screenshot
-3. **Change Color**: Click a color button in the toolbar
-4. **Adjust Brush Size**: Use the slider in the toolbar
-5. **Undo**: Press Cmd+Z or click the Undo button
-6. **Clear**: Click the Clear button to remove all drawings
-7. **Copy to Clipboard**: Press the configured key (default: F6), tablet button, or Cmd+C
-8. **Save**: Press Cmd+S or click the Save button
+## Requirements
 
-## Wacom Setup Tips
-
-1. Open **Wacom Tablet Preferences**
-2. Select your Intuos tablet
-3. Go to the **ExpressKeys** or **Pen Buttons** section
-4. Assign a button to **Keystroke**
-5. Set the keystroke to F5 (for screenshot) or F6 (for copy)
+- macOS 12.0 (Monterey) or later
+- Screen Recording permission (required for screenshots)
+- Accessibility permission (for global hotkeys)
 
 ## Permissions
 
-On first launch, macOS will ask for:
+On first launch, macOS will prompt for:
 
-1. **Screen Recording**: Required to capture screenshots
-   - Go to System Preferences → Privacy & Security → Screen Recording
-   - Enable ScreenMagic
+1. **Screen Recording** - required to capture screenshots
+2. **Accessibility** - required for global hotkey registration
 
-2. **Accessibility**: Required for global hotkey support
-   - Go to System Preferences → Privacy & Security → Accessibility
-   - Enable ScreenMagic
+Grant these in **System Preferences → Privacy & Security**.
+
+## Wacom Tablet Tips
+
+- Map tablet buttons to F13 (screenshot) and F14 (copy)
+- The rotation wheel triggers zoom by default
+- Pressure sensitivity works automatically with supported tablets
+- Adjust "Pressure Flow" in settings to control thickness variation
+
+## Technical Details
+
+- Built with Swift and AppKit
+- Uses Carbon API for global hotkey registration
+- CGWindowListCreateImage for screen capture
+- Pressure sensitivity via NSEvent tablet events
+- No external dependencies
 
 ## Project Structure
 
 ```
 ScreenMagic/
-├── Package.swift           # Swift Package Manager config
-├── build.sh               # Build script
 ├── Sources/
-│   ├── main.swift         # App entry point
-│   ├── AppDelegate.swift  # Menu bar app & event handling
-│   ├── ScreenshotManager.swift    # Screenshot capture
-│   ├── DrawingWindowController.swift  # Drawing window
-│   ├── DrawingView.swift  # Canvas with drawing support
-│   ├── ConfigManager.swift    # Settings persistence
-│   └── ConfigWindowController.swift  # Settings UI
-└── Resources/
-    ├── Info.plist         # App metadata
-    └── ScreenMagic.entitlements  # App permissions
+│   ├── main.swift              # App entry point
+│   ├── AppDelegate.swift       # Menu bar, hotkeys, app lifecycle
+│   ├── ScreenshotManager.swift # Screen capture logic
+│   ├── DrawingWindowController.swift # Drawing window & toolbar
+│   ├── DrawingView.swift       # Canvas with zoom/pan/drawing
+│   ├── ConfigManager.swift     # Settings persistence
+│   └── ConfigWindowController.swift # Configuration UI
+├── Resources/
+│   └── Info.plist
+├── Package.swift
+└── build.sh
 ```
 
 ## License
 
 MIT License
+
+Copyright © 2026 [swaibian.com](https://swaibian.com)
+
+## Contributing
+
+Pull requests welcome! Please ensure code builds without warnings.

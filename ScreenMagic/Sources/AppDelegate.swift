@@ -44,6 +44,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Configuration...", action: #selector(openConfiguration), keyEquivalent: ","))
         menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "About ScreenMagic", action: #selector(showAbout), keyEquivalent: ""))
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit ScreenMagic", action: #selector(quitApp), keyEquivalent: "q"))
         
         statusItem.menu = menu
@@ -279,6 +281,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         configWindowController?.showWindow(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+    
+    @objc private func showAbout() {
+        let alert = NSAlert()
+        alert.messageText = "ScreenMagic"
+        alert.informativeText = "A macOS screenshot annotation tool."
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "OK")
+        
+        // Create clickable link
+        let linkText = "© by swaibian.com"
+        let linkField = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 20))
+        linkField.isEditable = false
+        linkField.isBordered = false
+        linkField.isSelectable = true
+        linkField.allowsEditingTextAttributes = true
+        linkField.backgroundColor = .clear
+        linkField.alignment = .center
+        
+        let attributedString = NSMutableAttributedString(string: linkText)
+        let linkRange = (linkText as NSString).range(of: "swaibian.com")
+        attributedString.addAttribute(.link, value: "https://www.swaibian.com", range: linkRange)
+        attributedString.addAttribute(.font, value: NSFont.systemFont(ofSize: 13), range: NSRange(location: 0, length: linkText.count))
+        linkField.attributedStringValue = attributedString
+        
+        alert.accessoryView = linkField
+        alert.runModal()
     }
     
     @objc private func quitApp() {

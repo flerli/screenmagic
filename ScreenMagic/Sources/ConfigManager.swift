@@ -46,6 +46,12 @@ struct AppConfig: Codable {
     /// Default brush size
     var defaultBrushSize: CGFloat = 3.0
     
+    /// Pressure sensitivity flow (0.0 = no pressure effect, 1.0 = full pressure effect)
+    var pressureFlow: CGFloat = 1.0
+    
+    /// Number badge size (diameter in pixels)
+    var numberBadgeSize: CGFloat = 32.0
+    
     /// Default drawing color (stored as hex)
     var defaultColorHex: String = "#FF0000"
     
@@ -70,6 +76,8 @@ struct AppConfig: Codable {
         copyModifiers = try container.decodeIfPresent(UInt32.self, forKey: .copyModifiers) ?? 0
         borderSize = try container.decodeIfPresent(CGFloat.self, forKey: .borderSize) ?? 50
         defaultBrushSize = try container.decodeIfPresent(CGFloat.self, forKey: .defaultBrushSize) ?? 3.0
+        pressureFlow = try container.decodeIfPresent(CGFloat.self, forKey: .pressureFlow) ?? 1.0
+        numberBadgeSize = try container.decodeIfPresent(CGFloat.self, forKey: .numberBadgeSize) ?? 32.0
         defaultColorHex = try container.decodeIfPresent(String.self, forKey: .defaultColorHex) ?? "#FF0000"
     }
 }

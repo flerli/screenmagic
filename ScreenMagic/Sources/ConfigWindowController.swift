@@ -25,12 +25,15 @@ class ConfigWindowController: NSWindowController {
     private var copyKeyButton: KeyCaptureButton!
     private var borderField: NSTextField!
     private var brushSizeField: NSTextField!
+    private var badgeSizeField: NSTextField!
+    private var pressureFlowSlider: NSSlider!
+    private var pressureFlowLabel: NSTextField!
     
     private let screenshotManager = ScreenshotManager()
     
     init() {
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 520, height: 720),
+            contentRect: NSRect(x: 0, y: 0, width: 520, height: 700),
             styleMask: [.titled, .closable],
             backing: .buffered,
             defer: false
@@ -53,7 +56,7 @@ class ConfigWindowController: NSWindowController {
         guard let contentView = window?.contentView else { return }
         
         let padding: CGFloat = 20
-        var yOffset: CGFloat = 670
+        var yOffset: CGFloat = 650
         
         // Title
         let titleLabel = NSTextField(labelWithString: "ScreenMagic Configuration")
@@ -61,7 +64,7 @@ class ConfigWindowController: NSWindowController {
         titleLabel.frame = NSRect(x: padding, y: yOffset, width: 400, height: 24)
         contentView.addSubview(titleLabel)
         
-        yOffset -= 45
+        yOffset -= 40
         
         // --- Screenshot Source Display ---
         let sourceSection = createSectionLabel("Screenshot Source")
@@ -192,6 +195,33 @@ class ConfigWindowController: NSWindowController {
         brushSizeField = NSTextField(frame: NSRect(x: 265, y: yOffset, width: 60, height: 22))
         contentView.addSubview(brushSizeField)
         
+        let badgeLabel = NSTextField(labelWithString: "Badge Size:")
+        badgeLabel.frame = NSRect(x: 340, y: yOffset, width: 80, height: 22)
+        contentView.addSubview(badgeLabel)
+        
+        badgeSizeField = NSTextField(frame: NSRect(x: 420, y: yOffset, width: 60, height: 22))
+        contentView.addSubview(badgeSizeField)
+        
+        yOffset -= 28
+        
+        let pressureLabel = NSTextField(labelWithString: "Pressure Flow:")
+        pressureLabel.frame = NSRect(x: padding, y: yOffset, width: 100, height: 22)
+        contentView.addSubview(pressureLabel)
+        
+        pressureFlowSlider = NSSlider(value: 1.0, minValue: 0.0, maxValue: 1.0, target: self, action: #selector(pressureFlowChanged))
+        pressureFlowSlider.frame = NSRect(x: 125, y: yOffset, width: 150, height: 22)
+        contentView.addSubview(pressureFlowSlider)
+        
+        pressureFlowLabel = NSTextField(labelWithString: "100%")
+        pressureFlowLabel.frame = NSRect(x: 280, y: yOffset, width: 50, height: 22)
+        contentView.addSubview(pressureFlowLabel)
+        
+        let pressureHelp = NSTextField(labelWithString: "0% = constant, 100% = full pressure")
+        pressureHelp.font = NSFont.systemFont(ofSize: 10)
+        pressureHelp.textColor = .secondaryLabelColor
+        pressureHelp.frame = NSRect(x: 335, y: yOffset, width: 180, height: 22)
+        contentView.addSubview(pressureHelp)
+        
         yOffset -= 40
         
         // --- Keyboard Shortcuts ---
@@ -216,6 +246,42 @@ class ConfigWindowController: NSWindowController {
         
         copyKeyButton = KeyCaptureButton(frame: NSRect(x: 140, y: yOffset, width: 150, height: 26))
         contentView.addSubview(copyKeyButton)
+        
+        yOffset -= 40
+        
+        // --- Hotkey Legend ---
+        let legendSection = createSectionLabel("Drawing Window Hotkeys")
+        legendSection.frame.origin = CGPoint(x: padding, y: yOffset)
+        contentView.addSubview(legendSection)
+        
+        yOffset -= 25
+        
+        let legendItems = [
+            ("1-6", "Switch color (Red, Blue, Green, Yellow, Purple, Cyan)"),
+            ("1-9 x2", "Double-press to add number badge at cursor"),
+            ("c", "Toggle crop mode"),
+            ("Cmd+Z", "Undo last action"),
+            ("Cmd+C", "Copy to clipboard and close"),
+            ("Cmd+S", "Save to file"),
+            ("Scroll", "Zoom in/out (centered on cursor)"),
+            ("Opt+Drag", "Pan the image"),
+            ("Shift+Scroll", "Pan the image")
+        ]
+        
+        for (key, description) in legendItems {
+            let keyLabel = NSTextField(labelWithString: key)
+            keyLabel.font = NSFont.monospacedSystemFont(ofSize: 11, weight: .medium)
+            keyLabel.frame = NSRect(x: padding + 10, y: yOffset, width: 80, height: 18)
+            contentView.addSubview(keyLabel)
+            
+            let descLabel = NSTextField(labelWithString: description)
+            descLabel.font = NSFont.systemFont(ofSize: 11)
+            descLabel.textColor = .secondaryLabelColor
+            descLabel.frame = NSRect(x: padding + 95, y: yOffset, width: 380, height: 18)
+            contentView.addSubview(descLabel)
+            
+            yOffset -= 20
+        }
         
         // --- Buttons ---
         let saveButton = NSButton(title: "Save", target: self, action: #selector(saveConfig))
@@ -270,6 +336,9 @@ class ConfigWindowController: NSWindowController {
         copyKeyButton.modifiers = config.copyModifiers
         borderField.stringValue = "\(Int(config.borderSize))"
         brushSizeField.stringValue = "\(Int(config.defaultBrushSize))"
+        badgeSizeField.stringValue = "\(Int(config.numberBadgeSize))"
+        pressureFlowSlider.doubleValue = Double(config.pressureFlow)
+        pressureFlowLabel.stringValue = "\(Int(config.pressureFlow * 100))%"
         
         updatePositionFieldsVisibility()
         updateCaptureAreaFieldsVisibility()
@@ -281,6 +350,11 @@ class ConfigWindowController: NSWindowController {
     
     @objc private func customAreaCheckboxChanged() {
         updateCaptureAreaFieldsVisibility()
+    }
+    
+    @objc private func pressureFlowChanged() {
+        let value = pressureFlowSlider.doubleValue
+        pressureFlowLabel.stringValue = "\(Int(value * 100))%"
     }
     
     private func updatePositionFieldsVisibility() {
@@ -328,6 +402,8 @@ class ConfigWindowController: NSWindowController {
             config.copyModifiers = copyKeyButton.modifiers
             config.borderSize = CGFloat(borderField.intValue)
             config.defaultBrushSize = CGFloat(brushSizeField.intValue)
+            config.numberBadgeSize = CGFloat(badgeSizeField.intValue)
+            config.pressureFlow = CGFloat(pressureFlowSlider.doubleValue)
         }
         
         // Re-register hotkeys with new key codes
